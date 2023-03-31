@@ -198,7 +198,9 @@ if save == 1
          fprintf(fid,'%s\n',Dataset);
          fprintf(fid,'%s\n',days_text);
          fprintf(fid,'%s\n',firstDay_text);
+         fprintf(fid,'%s\n',DeploymentDateText);
          fprintf(fid,'%s\n',lastDay_text);
+         fprintf(fid,'%s\n',RecoveryDateText);
          fprintf(fid,'%s\n',numfiles);
          fprintf(fid,'%s\n',file_prediction_text);
          fprintf(fid,'%s\n',Total_GB_text);
