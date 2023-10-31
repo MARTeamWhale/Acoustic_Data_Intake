@@ -1,5 +1,5 @@
 
-%sandbox.mat 
+%Merge_wav.mat 
 %merge and move AMAR .wav files
 tic;
 clear
@@ -7,8 +7,8 @@ close all
 
 %%%%% Make changes as needed %%%%%
 %enter path to highest data folder
-Path2Data = 'G:\FCM_2021_08\Data';
-Path2Output = 'F:\FCM_2021_08\AMAR774.1.2.256000';
+Path2Data = 'G:\CBN_2022_10\Data';
+Path2Output = 'F:\CBN_2022_10\AMAR819.1.2.3.4.32000';
 %recording interval
 %ri = 900; %seconds
 %maxDur = seconds(240);

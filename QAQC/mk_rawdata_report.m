@@ -6,11 +6,11 @@ close all
 %%%%%%%%%%%%%%%%%
 %Change as needed
 %%%%%%%%%%%%%%%%%
-Dataset = 'MGL_2021_08';
-Path2dataset = "\\142.2.83.52\whalenas4\MOORED_PAM_DATA\2021\08\MGL_2021_08\";
-datafolder = 'AMAR192.9.250000.M36-V35-100';
-DeploymentDate = "2021-08-29";
-RecoveryDate = "2022-10-10";
+Dataset = 'CBN_2022_10';
+Path2dataset = "G:\CBN_2022_10\";
+datafolder = 'Data';
+DeploymentDate = "2022-10-15";
+RecoveryDate = "2023-08-18";
 Foverride = 0; % 1: uses filesize values entered 0: uses median filesize (works in most cases)
 file_size_override = 44496280; %48907866; %145299528; %327931464; 
 %%%%%%%%%%%%%%%%%
@@ -33,7 +33,7 @@ end
 
 fileList = struct2table(fileList);
 total_size_bytes = sum(fileList.bytes);
-total_size_GB = total_size_bytes/(1024^3);
+total_size_GB = total_size_bytes/(1000^3);
 Total_GB_text = ['Total dataset size: ', num2str(total_size_GB),'GB'];
 disp(Total_GB_text);
 
