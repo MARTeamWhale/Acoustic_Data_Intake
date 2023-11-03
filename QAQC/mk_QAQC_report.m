@@ -30,7 +30,7 @@ end
 
 fileList = struct2table(fileList);
 total_size_bytes = sum(fileList.bytes);
-total_size_GB = total_size_bytes/(1024^3);
+total_size_GB = total_size_bytes/(1000^3);
 Total_GB_text = ['Total dataset size: ', num2str(total_size_GB),'GB'];
 disp(Total_GB_text);
 
