@@ -1,6 +1,6 @@
 
 %Merge_wav.mat 
-%merge and move AMAR .wav files
+%merge and copy AMAR .wav files
 tic;
 clear
 close all

@@ -6,9 +6,9 @@ close all
 
 %%%%% Make changes as needed %%%%%
 %enter path to data source folder
-Path2Data = 'G:\CS1_2022_10';
+Path2Data = 'F:\CS1_2022_10\Data';
 %enter path to data destination folder
-Path2Output = 'F:\CS1_2022_10';
+Path2Output = 'F:\CBN_2022_10';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -29,7 +29,7 @@ for f = 1:length(files)
     if ~exist(Output_path, 'dir')
        mkdir(Output_path)
     end
-    copyfile(file,Output_path);
+    copyfile(file,Output_file,Output_path);
 end
 
 ext = {'**/*.csv','**/*.xml'};

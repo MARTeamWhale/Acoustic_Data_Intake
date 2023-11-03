@@ -1,0 +1,40 @@
+%Move_PrePost.m
+
+%Move pre and post deployment wav files to seperate folder
+
+clear
+close all
+
+%%%%% Make changes as needed %%%%%
+%enter path to data source folder
+Path2Data = 'F:\CBN_2022_10\AMAR819.1.256000';
+%enter path to data destination folder
+Path2Output = 'F:\CBN_2022_10';
+% Enter Deployment and Recovery Date from Whale Equipment MetaDatabase
+DeploymentDateTime = "2022-10-15 09:33:00";
+RecoveryDateTime = "2023-08-18 10:59:00";
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+DeploymentDateTime = datetime(DeploymentDateTime);
+RecoveryDateTime = datetime(RecoveryDateTime);
+files = dir(fullfile(Path2Data, '**\*.wav'));
+for i = 1:length(files)
+    files(i).datetime = datetime(readDateTime(convertStringsToChars(files(i).name)));
+    if files(i).datetime < DeploymentDateTime && files(i).datetime > RecoveryDateTime
+       files.prepost = 1;
+    else  
+       files.prepost = 0; 
+    end
+end
+
+PrePostFiles = files(files.datetime < DeploymentDateTime && files.datetime > RecoveryDateTime,:);
+
+    if ~exist([Path2Output,'\Pre&PostDeployment'], 'dir')
+       mkdir([Path2Output,'\Pre&PostDeployment'])
+    end
+    
+for f = 1:length(other_files)
+    file = [other_files(f).folder,'\',other_files(f).name];
+copyfile(file,[Path2Output,'\Pre&PostDeployment'])
+end
+
