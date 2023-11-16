@@ -6,9 +6,9 @@ close all
 %%%%%%%%%%%%%%%%%
 %Change as needed
 %%%%%%%%%%%%%%%%%
-Dataset = 'CBN_2022_10';
-Path2dataset = "F:\CBN_2022_10\";
-datafolder = 'AMAR819.1.256000';
+Dataset = 'CSW_2022_10';
+Path2dataset = "F:\CSW_2022_10\";
+datafolder = 'AMAR712.1-2-3-4.8000';
 DeploymentDate = "2022-10-15";
 RecoveryDate = "2023-08-18";
 Foverride = 0; % 1: uses filesize values entered 0: uses median filesize (works in most cases)
@@ -49,8 +49,8 @@ RecoveryDateText = ['Recovery Date: ' datestr(RecoveryDate)];
 disp(RecoveryDateText);
 
 % check interval
-int1 = fileList.datetime(2) - fileList.datetime(1);
-int2 = fileList.datetime(6) - fileList.datetime(5);
+int1 = fileList.datetime(3) - fileList.datetime(2);
+int2 = fileList.datetime(8) - fileList.datetime(7);
 all_intervals = diff(fileList.datetime); 
 
 if int1 == int2

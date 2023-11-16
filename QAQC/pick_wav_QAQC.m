@@ -7,10 +7,10 @@ close all
 %%%%%%%%%%%%%%%%%
 %Change as needed
 %%%%%%%%%%%%%%%%%
-Dataset = 'CBN_2022_10';
-Path2dataset = 'F:\CBN_2022_10\';
-datafolder = 'AMAR819.1.256000';
-seed = 15; %Change seed for each selection
+Dataset = 'CSW_2022_10';
+Path2dataset = 'F:\CSW_2022_10\';
+datafolder = 'AMAR712.1-2-3-4.8000';
+seed = 19; %Change seed for each selection
 %%%%%%%%%%%%%%%%%
 seed_text = join(['Seed: ' , num2str(seed)]);
 Path2data = join([Path2dataset,datafolder],'');

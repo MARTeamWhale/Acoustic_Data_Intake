@@ -6,13 +6,14 @@ close all
 %%%%%%%%%%%%%%%%%
 %Change as needed
 %%%%%%%%%%%%%%%%%
-Path2dataset = "\\142.2.83.52\whalenas4\MOORED_PAM_DATA\2021\08\ROBE_2021_08\";
-datafolder = 'ST5352.96000'; 
+Path2dataset = "F:\CSE_2022_10";
+datafolder = '';
+Path2Output = "G:\CSE_2022_10\ST6767-6769";
 %%%%%%%%%%%%%%%%%
 
 Path2data = join([Path2dataset,datafolder],'');
 
-fileList = dir(fullfile(Path2data, '*.wav')); %Get fileslist
+fileList = dir(fullfile(Path2data, '**/*.wav')); %Get fileslist
 fileList = struct2table(fileList);
 
 
@@ -33,7 +34,9 @@ h = waitbar(0,'Please wait...');
 for i = 1:height(fileList)
     Path2file = char(strcat(fileList.folder(i),'\',fileList.name(i)));
     NewName = char(fileList.rename(i));
-    system("rename " + Path2file + " " + NewName);
+    Path2Newfile = char(strcat(Path2Output,'\',NewName));
+    copyfile(Path2file,Path2Newfile)
+    %system("rename " + Path2file + " " + NewName);
     waitbar(i/height(fileList),h)
 end
 

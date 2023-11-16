@@ -6,9 +6,9 @@ close all
 %%%%%%%%%%%%%%%%%
 %Change as needed
 %%%%%%%%%%%%%%%%%
-Dataset = 'CBN_2022_10';
-Path2dataset = "G:\CBN_2022_10\";
-datafolder = 'Data';
+Dataset = 'CSW_2022_10';
+Path2dataset = "G:\CSW_2022_10\";
+datafolder = '';
 DeploymentDate = "2022-10-15";
 RecoveryDate = "2023-08-18";
 Foverride = 0; % 1: uses filesize values entered 0: uses median filesize (works in most cases)

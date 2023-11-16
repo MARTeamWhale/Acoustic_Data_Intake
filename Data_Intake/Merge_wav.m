@@ -7,8 +7,9 @@ close all
 
 %%%%% Make changes as needed %%%%%
 %enter path to highest data folder
-Path2Data = 'G:\CBN_2022_10\Data';
-Path2Output = 'F:\CBN_2022_10\AMAR819.1.2.3.4.32000';
+Path2Data = 'I:\MGE_2022_10';
+Path2Output = 'H:\MGE_2022_10\AMAR673.1.256000';
+START_FILE = 'AMAR673.20221130T063919Z.wav'; %leave blank to start from beginning. Only use when process was interrupted
 %recording interval
 %ri = 900; %seconds
 %maxDur = seconds(240);
@@ -32,7 +33,17 @@ while f <= length(files)-1 && k < length(files)%beginning of files loop
     if k ~= 0 && merge == 1
     f = k;
     end
-    
+    %%%% FIX THIS....
+    if ~isempty(START_FILE)
+        for restart = 1:length(files)
+            if strcmp(START_FILE,files(restart).name) == 1
+               f = restart;
+            end
+        end
+        ffirst = START_FILE;
+    else
+        ffirst = files(f).name;
+    end
     ffirst = files(f).name;
     filepath = files(f).folder;
     fullpath = strcat(filepath,'\',ffirst);
