@@ -25,6 +25,7 @@ File_collector = [];
 f = 1;
 k = 0;
 merge = 0;
+s = 0;
 %return good to this point
 %for f = 1:length(files) %beginning of files loop
 
@@ -33,16 +34,14 @@ while f <= length(files)-1 && k < length(files)%beginning of files loop
     if k ~= 0 && merge == 1
     f = k;
     end
-    %%%% FIX THIS....
-    if ~isempty(START_FILE)
+
+    if ~isempty(START_FILE) && s == 0
         for restart = 1:length(files)
             if strcmp(START_FILE,files(restart).name) == 1
                f = restart;
+               s = 1;
             end
         end
-        ffirst = START_FILE;
-    else
-        ffirst = files(f).name;
     end
     ffirst = files(f).name;
     filepath = files(f).folder;
