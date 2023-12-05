@@ -6,9 +6,9 @@ close all
 
 %%%%% Make changes as needed %%%%%
 %enter path to data source folder
-Path2Data = 'G:\CSW_2022_10';
+Path2Data = 'F:\CS3-2022-10';
 %enter path to data destination folder
-Path2Output = 'F:\CSW_2022_10';
+Path2Output = 'G:\CS3-2022-10';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 

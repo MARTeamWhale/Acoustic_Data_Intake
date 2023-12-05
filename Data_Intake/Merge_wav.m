@@ -7,9 +7,9 @@ close all
 
 %%%%% Make changes as needed %%%%%
 %enter path to highest data folder
-Path2Data = 'I:\MGE_2022_10';
-Path2Output = 'H:\MGE_2022_10\AMAR673.1.256000';
-START_FILE = 'AMAR673.20221130T063919Z.wav'; %leave blank to start from beginning. Only use when process was interrupted
+Path2Data = 'H:\ELC-2022-10';
+Path2Output = 'I:\ELC-2022-10\AMAR376.1.256000';
+START_FILE = ''; %leave blank to start from beginning. Only use when process was interrupted
 %recording interval
 %ri = 900; %seconds
 %maxDur = seconds(240);
