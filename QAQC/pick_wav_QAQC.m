@@ -7,10 +7,10 @@ close all
 %%%%%%%%%%%%%%%%%
 %Change as needed
 %%%%%%%%%%%%%%%%%
-Dataset = 'FLP_2018_07';
-Path2dataset = '\\142.2.83.52\whalenas3\NFLD_AMAR_DATA\FLP_2018_07\MMNL043\';
-datafolder = 'AMAR537.1.512000.M36-V35-100';
-seed = 13; %Change seed for each deployment
+Dataset = 'CS3_2022_10';
+Path2dataset = "G:\CS3-2022-10\";
+datafolder = 'AMAR664.1.256000';
+seed = 24; %Change seed for each selection
 %%%%%%%%%%%%%%%%%
 seed_text = join(['Seed: ' , num2str(seed)]);
 Path2data = join([Path2dataset,datafolder],'');

@@ -6,13 +6,14 @@ close all
 %%%%%%%%%%%%%%%%%
 %Change as needed
 %%%%%%%%%%%%%%%%%
-Dataset = 'MGL_2021_08';
-Path2dataset = "\\142.2.83.52\whalenas4\MOORED_PAM_DATA\2021\08\MGL_2021_08\";
-datafolder = 'AMAR192.9.250000.M36-V35-100';
-DeploymentDate = "2021-08-29";
-RecoveryDate = "2022-10-10";
+Dataset = 'CS3_2022_10';
+Path2dataset = "G:\CS3-2022-10\";
+datafolder = 'AMAR664.1.256000';
+DeploymentDate = "2022-10-15";
+RecoveryDate = "2023-08-20";
 Foverride = 0; % 1: uses filesize values entered 0: uses median filesize (works in most cases)
 file_size_override = 44496280; %48907866; %145299528; %327931464; 
+Stat_toolbox = 0; %Set to 0 if license for stats toolbox checkout fails
 %%%%%%%%%%%%%%%%%
 
 Path2data = join([Path2dataset,datafolder],'');
@@ -29,8 +30,9 @@ for i = 1:length(fileList)
 end
 
 fileList = struct2table(fileList);
+fileList = sortrows(fileList,"datetime");
 total_size_bytes = sum(fileList.bytes);
-total_size_GB = total_size_bytes/(1024^3);
+total_size_GB = total_size_bytes/(1000^3);
 Total_GB_text = ['Total dataset size: ', num2str(total_size_GB),'GB'];
 disp(Total_GB_text);
 
@@ -49,14 +51,19 @@ RecoveryDateText = ['Recovery Date: ' datestr(RecoveryDate)];
 disp(RecoveryDateText);
 
 % check interval
-int1 = fileList.datetime(2) - fileList.datetime(1);
-int2 = fileList.datetime(6) - fileList.datetime(5);
+int1 = fileList.datetime(3) - fileList.datetime(2);
+int2 = fileList.datetime(8) - fileList.datetime(7);
 all_intervals = diff(fileList.datetime); 
-
+if Stat_toolbox == 1
+    table_intervals = tabulate(all_intervals);
+    disp(['     Value   ','     Count    ','Percent   '])
+    disp(table_intervals)
+end
 if int1 == int2
     interval = int1;
 else
-    disp("Error: Intervals do not match");
+    disp("Error: Intervals do not match. Using mean interval as approximation. Please check.");
+    interval = mean(all_intervals);
 end
 
 Time_index = firstDay:interval:lastDay;
