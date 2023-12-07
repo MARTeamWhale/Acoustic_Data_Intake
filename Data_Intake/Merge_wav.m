@@ -15,6 +15,8 @@ START_FILE = ''; %leave blank to start from beginning. Only use when process was
 %maxDur = seconds(240);
 %multi-channel? incomplete
 %NumSamplerates = 1;
+%switch the moving of non-acoustic files on (1) and off (0)
+move_NonAcoustic = 1; 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %ri = seconds(ri); % interval to duration
@@ -129,16 +131,18 @@ if dtlf == testdt
     delete(info_lf.Filename);
 end
 
-ext = {'**/*.csv','**/*.xml','**/*.txt'};
-extensions = cellfun(@(x)dir(fullfile(Path2Data,x)),ext,'UniformOutput',false);
-other_files = vertcat(extensions{:});
+if move_NonAcoustic == 1
+    ext = {'**/*.csv','**/*.xml', '**/*.txt'};
+    extensions = cellfun(@(x)dir(fullfile(Path2Data,x)),ext,'UniformOutput',false); 
+    other_files = vertcat(extensions{:});
 
-    if ~exist([Path2Output,'\Non-Acoustic Files'], 'dir')
-       mkdir([Path2Output,'\Non-Acoustic Files'])
+        if ~exist([Path2Output,'\Non-Acoustic Files'], 'dir')
+            mkdir([Path2Output,'\Non-Acoustic Files'])
+        end
+    for f = 1:length(other_files)
+        file = [other_files(f).folder,'\',other_files(f).name];
+    copyfile(file,[Path2Output,'\Non-Acoustic Files'])
     end
-for f = 1:length(other_files)
-    file = [other_files(f).folder,'\',other_files(f).name];
-copyfile(file,[Path2Output,'\Non-Acoustic Files'])
 end
 
 toc;
