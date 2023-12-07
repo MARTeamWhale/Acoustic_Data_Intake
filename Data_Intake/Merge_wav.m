@@ -128,6 +128,19 @@ if dtlf == testdt
     audiowrite(outlastfile,com_slflf,fs,'BitsPerSample',bits)
     delete(info_lf.Filename);
 end
+
+ext = {'**/*.csv','**/*.xml','**/*.txt'};
+extensions = cellfun(@(x)dir(fullfile(Path2Data,x)),ext,'UniformOutput',false);
+other_files = vertcat(extensions{:});
+
+    if ~exist([Path2Output,'\Non-Acoustic Files'], 'dir')
+       mkdir([Path2Output,'\Non-Acoustic Files'])
+    end
+for f = 1:length(other_files)
+    file = [other_files(f).folder,'\',other_files(f).name];
+copyfile(file,[Path2Output,'\Non-Acoustic Files'])
+end
+
 toc;
 
  
