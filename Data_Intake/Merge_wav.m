@@ -7,13 +7,10 @@ close all
 
 %%%%% Make changes as needed %%%%%
 %enter path to highest data folder
-<<<<<<< HEAD
+
 Path2Data = 'I:\MGE_2022_10';
 Path2Output = 'H:\MGE_2022_10';
-=======
-Path2Data = 'H:\ELC-2022-10';
-Path2Output = 'I:\ELC-2022-10\AMAR376.1.256000';
->>>>>>> e0bf7764c9e7d51c7698e90e535494ea7dc2b619
+
 START_FILE = ''; %leave blank to start from beginning. Only use when process was interrupted
 %recording interval
 %ri = 900; %seconds
