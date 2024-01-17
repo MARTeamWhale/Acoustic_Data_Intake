@@ -8,8 +8,8 @@ close all
 %%%%% Make changes as needed %%%%%
 %enter path to highest data folder
 Path2Data = 'I:\MGE_2022_10';
-Path2Output = 'H:\MGE_2022_10\AMAR673.1.256000';
-START_FILE = 'AMAR673.20221130T063919Z.wav'; %leave blank to start from beginning. Only use when process was interrupted
+Path2Output = 'H:\MGE_2022_10';
+START_FILE = ''; %leave blank to start from beginning. Only use when process was interrupted
 %recording interval
 %ri = 900; %seconds
 %maxDur = seconds(240);
@@ -19,11 +19,11 @@ START_FILE = 'AMAR673.20221130T063919Z.wav'; %leave blank to start from beginnin
 
 %ri = seconds(ri); % interval to duration
 files = dir(fullfile(Path2Data, '**\*.wav')); %Recursively find all WAV files 
-filetable = struct2table(files); 
-filetable.saved = zeros(size(files,1),1);
-File_collector = [];
-f = 1;
-k = 0;
+filetable = struct2table(files);              %convert to table
+filetable.saved = zeros(size(files,1),1);     %Create variable to keep track of which files are saves
+File_collector = [];                          %Initialize variable to collect data
+f = 1;                                        %Set up f to mark first file
+k = 0;                                        
 merge = 0;
 s = 0;
 %return good to this point
@@ -49,6 +49,10 @@ while f <= length(files)-1 && k < length(files)%beginning of files loop
     dt = readDateTime(fullpath);
     finfo = audioinfo(fullpath);
     bits = finfo.BitsPerSample;
+    channels = sprintf('%.17g-',[1:info.NumChannels]); % Up to 17 decimal places (double precision has about 16) 
+    channels = channels(1:end-1);
+    sample_rate = info.SampleRate;
+    amar = split(files(f).name, '.');
     [y, fs] = audioread(fullpath, 'native');
     File_collector = y;
     k = f;
@@ -70,8 +74,13 @@ while f <= length(files)-1 && k < length(files)%beginning of files loop
     end
     
     if k == length(files)-1
-        outFile = fullfile(Path2Output,files(f).name);
-        audiowrite(outFile,File_collector,fs,'BitsPerSample',bits);
+        Output_path = [Path2Output '\' amar(1) '.' channels '.' num2str(sample_rate)];
+        Output_path = cell2mat(Output_path); 
+        if ~exist(Output_path, 'dir')
+            mkdir(Output_path)
+        end
+        outFile = fullfile(Output_path,files(f).name);
+        audiowrite(outFile,File_collector,fs,'BitsPerSample',bits); 
         filetable.saved(f) = 1;
         f = f+1;%%%%%
         k=0;
@@ -88,12 +97,15 @@ while f <= length(files)-1 && k < length(files)%beginning of files loop
         File_collector = [File_collector;tempy];
         k = k+1;
         if k == length(files) + 1
-           outFile = fullfile(Path2Output,files(f).name);
+            Output_path = [Path2Output '\' amar(1) '.' channels '.' num2str(sample_rate)];
+            Output_path = cell2mat(Output_path); 
+            if ~exist(Output_path, 'dir')
+                mkdir(Output_path)
+            end
+           outFile = fullfile(Output_path,files(f).name);
            audiowrite(outFile,File_collector,fs,'BitsPerSample',bits);
            filetable.saved(f) = 1;
            toc;
-           %return
-           
         end
         dt = dttemp;
         dtnext = dt + seconds(finfotemp.Duration);
@@ -102,17 +114,21 @@ while f <= length(files)-1 && k < length(files)%beginning of files loop
         fnametemp = files(k).name;
         dttemp = readDateTime(fnametemp);
     end
-    outFile = fullfile(Path2Output,files(f).name);
+    Output_path = [Path2Output '\' amar(1) '.' channels '.' num2str(sample_rate)];
+    Output_path = cell2mat(Output_path); 
+    if ~exist(Output_path, 'dir')
+       mkdir(Output_path)
+    end
+    outFile = fullfile(Output_path,files(f).name);
     audiowrite(outFile,File_collector,fs,'BitsPerSample',bits);
     filetable.saved(f) = 1;
     merge = 1;
-    %return
 end
 
-movedfiles = dir(fullfile(Path2Output, '**\*.wav')); %Recursively find all WAV files
-movedfiletable = struct2table(movedfiles); 
-slfpath = fullfile(movedfiles(length(movedfiles)-1).folder,movedfiles(length(movedfiles)-1).name);
-lfpath = fullfile(movedfiles(length(movedfiles)).folder,movedfiles(length(movedfiles)).name);
+movedfiles = dir(fullfile(Path2Output, '**\*.wav')); %Recursively find all moved/merged WAV files
+movedfiletable = struct2table(movedfiles);           %Create table of moved/merged files
+slfpath = fullfile(movedfiles(length(movedfiles)-1).folder,movedfiles(length(movedfiles)-1).name); %second last moved file
+lfpath = fullfile(movedfiles(length(movedfiles)).folder,movedfiles(length(movedfiles)).name);      %last moved file
 
 info_slf = audioinfo(slfpath);
 info_lf = audioinfo(lfpath);
