@@ -6,11 +6,11 @@ close all
 %%%%%%%%%%%%%%%%%
 %Change as needed
 %%%%%%%%%%%%%%%%%
-Dataset = 'CSW_2022_10';
-Path2dataset = "G:\CSW_2022_10\";
+Dataset = 'CS3_2022_10';
+Path2dataset = "F:\CS3-2022-10";
 datafolder = '';
 DeploymentDate = "2022-10-15";
-RecoveryDate = "2023-08-18";
+RecoveryDate = "2023-08-20";
 Foverride = 0; % 1: uses filesize values entered 0: uses median filesize (works in most cases)
 file_size_override = 44496280; %48907866; %145299528; %327931464; 
 %%%%%%%%%%%%%%%%%

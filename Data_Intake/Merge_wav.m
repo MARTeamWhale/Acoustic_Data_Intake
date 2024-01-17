@@ -7,14 +7,21 @@ close all
 
 %%%%% Make changes as needed %%%%%
 %enter path to highest data folder
+<<<<<<< HEAD
 Path2Data = 'I:\MGE_2022_10';
 Path2Output = 'H:\MGE_2022_10';
+=======
+Path2Data = 'H:\ELC-2022-10';
+Path2Output = 'I:\ELC-2022-10\AMAR376.1.256000';
+>>>>>>> e0bf7764c9e7d51c7698e90e535494ea7dc2b619
 START_FILE = ''; %leave blank to start from beginning. Only use when process was interrupted
 %recording interval
 %ri = 900; %seconds
 %maxDur = seconds(240);
 %multi-channel? incomplete
 %NumSamplerates = 1;
+%switch the moving of non-acoustic files on (1) and off (0)
+move_NonAcoustic = 1; 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %ri = seconds(ri); % interval to duration
@@ -144,6 +151,21 @@ if dtlf == testdt
     audiowrite(outlastfile,com_slflf,fs,'BitsPerSample',bits)
     delete(info_lf.Filename);
 end
+
+if move_NonAcoustic == 1
+    ext = {'**/*.csv','**/*.xml', '**/*.txt'};
+    extensions = cellfun(@(x)dir(fullfile(Path2Data,x)),ext,'UniformOutput',false); 
+    other_files = vertcat(extensions{:});
+
+        if ~exist([Path2Output,'\Non-Acoustic Files'], 'dir')
+            mkdir([Path2Output,'\Non-Acoustic Files'])
+        end
+    for f = 1:length(other_files)
+        file = [other_files(f).folder,'\',other_files(f).name];
+    copyfile(file,[Path2Output,'\Non-Acoustic Files'])
+    end
+end
+
 toc;
 
  
