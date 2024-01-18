@@ -8,8 +8,8 @@ close all
 %%%%% Make changes as needed %%%%%
 %enter path to highest data folder
 
-Path2Data = 'I:\MGE_2022_10';
-Path2Output = 'H:\MGE_2022_10';
+Path2Data = 'E:\MGE_2022_10_merge_test\unmerged';
+Path2Output = 'E:\MGE_2022_10_merge_test\merged';
 
 START_FILE = ''; %leave blank to start from beginning. Only use when process was interrupted
 %recording interval
@@ -51,8 +51,8 @@ while f <= length(files)-1 && k < length(files)%beginning of files loop
     filepath = files(f).folder;
     fullpath = strcat(filepath,'\',ffirst);
     dt = readDateTime(fullpath);
-    finfo = audioinfo(fullpath);
-    bits = finfo.BitsPerSample;
+    info = audioinfo(fullpath);
+    bits = info.BitsPerSample;
     channels = sprintf('%.17g-',[1:info.NumChannels]); % Up to 17 decimal places (double precision has about 16) 
     channels = channels(1:end-1);
     sample_rate = info.SampleRate;
@@ -67,7 +67,7 @@ while f <= length(files)-1 && k < length(files)%beginning of files loop
     end
     
     fnametemp = files(k).name;
-    dtnext = dt + seconds(finfo.Duration);
+    dtnext = dt + seconds(info.Duration);
     dttemp = readDateTime(fnametemp);
     
     while dttemp ~= dtnext && k < length(files)-1

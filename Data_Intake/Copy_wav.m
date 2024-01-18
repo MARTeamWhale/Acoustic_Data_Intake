@@ -6,9 +6,9 @@ close all
 
 %%%%% Make changes as needed %%%%%
 %enter path to data source folder
-Path2Data = 'F:\CS3-2022-10';
+Path2Data = 'E:\MGE_2022_10_merge_test\merged';
 %enter path to data destination folder
-Path2Output = 'G:\CS3-2022-10';
+Path2Output = 'E:\MGE_2022_10_merge_test\testcopy';
 %if you want to skip the moving of Non-Acoustic files set to 0
 move_NonAcoustic = 1;
 
