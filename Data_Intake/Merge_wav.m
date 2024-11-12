@@ -8,8 +8,8 @@ close all
 %%%%% Make changes as needed %%%%%
 %enter path to highest data folder
 
-Path2Data = 'E:\MGE_2022_10_merge_test\merged';
-Path2Output = 'E:\MGE_2022_10_merge_test\testcopy';
+Path2Data = 'D:\MERGE_TEST\MGL_2023_08_backup';
+Path2Output = 'D:\MERGE_TEST\MGL_2023_08_merged';
 
 START_FILE = ''; %leave blank to start from beginning. Only use when process was interrupted
 %recording interval
@@ -77,7 +77,7 @@ while f <= length(files)-1 && k < length(files)%beginning of files loop
         fnametemp = files(k).name;
         dttemp = readDateTime(fnametemp);
     end
-    if k == length(files)
+    if k == length(files) && dttemp ~= dtnext
         Output_path = [Path2Output '\' amar(1) '.' channels '.' num2str(sample_rate)];
         Output_path = cell2mat(Output_path); 
         if ~exist(Output_path, 'dir')
@@ -101,22 +101,26 @@ while f <= length(files)-1 && k < length(files)%beginning of files loop
         File_collector = [File_collector;tempy];
         filetable.merged(k) = 1;
         k = k+1;
-        if k == length(files) + 1
-            Output_path = [Path2Output '\' amar(1) '.' channels '.' num2str(sample_rate)];
-            Output_path = cell2mat(Output_path); 
-            if ~exist(Output_path, 'dir')
-                mkdir(Output_path)
-            end
-           outFile = fullfile(Output_path,files(f).name);
-           audiowrite(outFile,File_collector,fs,'BitsPerSample',bits);
-           filetable.saved(f) = 1;
-           toc;
-        end
+        %if k == length(files) + 1
+        %    Output_path = [Path2Output '\' amar(1) '.' channels '.' num2str(sample_rate)];
+        %    Output_path = cell2mat(Output_path); 
+        %    if ~exist(Output_path, 'dir')
+        %        mkdir(Output_path)
+        %    end
+        %   outFile = fullfile(Output_path,files(f).name);
+        %   audiowrite(outFile,File_collector,fs,'BitsPerSample',bits);
+        %   filetable.saved(f) = 1;
+        %   toc;
+        %end
         dt = dttemp;
         dtnext = dt + seconds(finfotemp.Duration);
         dtnexthi = dtnext+seconds(5);
         dtnextlo = dtnext-seconds(5);
-        fnametemp = files(k).name;
+        if k == length(files) + 1
+            continue
+        else
+            fnametemp = files(k).name;
+        end
         dttemp = readDateTime(fnametemp);
     end
     Output_path = [Path2Output '\' amar(1) '.' channels '.' num2str(sample_rate)];
