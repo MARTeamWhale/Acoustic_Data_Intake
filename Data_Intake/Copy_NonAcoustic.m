@@ -1,5 +1,8 @@
 %Copy_NonAcoustic.mat 
-%Moves files with files with defined extension to new location
+
+% Copy all files with defined extension(s) to "Non-Acoustic Files" subfolder in
+% the specified destination folder
+
 tic;
 clear
 close all
