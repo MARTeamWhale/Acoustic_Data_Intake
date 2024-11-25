@@ -1,16 +1,20 @@
 %Copy_wav.mat 
-%Copy, split channels, and samplerates of AMAR .wav files to new location
+
+% Copy AMAR .wav files to new location, organizing into subfolders based on
+% sampling rate and/or channel number. Optionally copy non-acoustic files
+% (.xml, .csv, .txt) into a separate subfolder in the destination folder.
+
 tic;
 clear
 close all
 
 %%%%% Make changes as needed %%%%%
 %enter path to data source folder
-Path2Data = 'E:\MGE_2022_10_merge_test\merged';
+Path2Data = 'E:\MGE_2022_10';
 %enter path to data destination folder
-Path2Output = 'E:\MGE_2022_10_merge_test\testcopy';
-%if you want to skip the moving of Non-Acoustic files set to 0
-move_NonAcoustic = 1;
+Path2Output = 'D:\MGE_2022_10';
+%if you want to skip copying non-acoustic files set to 0
+copy_NonAcoustic = 1;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -36,7 +40,7 @@ for f = 1:length(files)
 end
 
 
-if move_NonAcoustic == 1
+if copy_NonAcoustic == 1
     ext = {'**/*.csv','**/*.xml', '**/*.txt'};
     extensions = cellfun(@(x)dir(fullfile(Path2Data,x)),ext,'UniformOutput',false); 
     other_files = vertcat(extensions{:});
