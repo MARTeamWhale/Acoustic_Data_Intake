@@ -1,5 +1,5 @@
-%Copy_wav.mat 
-%Copy AMAR .wav files
+%Move_wav.mat 
+%Move AMAR .wav files
 tic;
 clear
 close all
@@ -17,7 +17,7 @@ files = dir(fullfile(Path2Data, '**\*.wav')); %Recursively find all WAV files (a
 
 for f = 1:length(files)
     file = [files(f).folder,'\',files(f).name];
-copyfile(file,[Path2Output,OUTPUT_FOLDER])
+movefile(file,[Path2Output,OUTPUT_FOLDER])
 
 end
 
@@ -32,7 +32,7 @@ if move_NonAcoustic == 1
     
     for f = 1:length(other_files)
         file = [other_files(f).folder,'\',other_files(f).name];
-        copyfile(file,[Path2Output,'\Non-Acoustic Files'])
+        movefile(file,[Path2Output,'\Non-Acoustic Files'])
     end
 end
 toc;
