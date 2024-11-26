@@ -1,6 +1,10 @@
 
 %Merge_wav.mat 
-%merge and move AMAR .wav files
+
+% Merge consecutive AMAR .wav files and write merged files to a new
+% location. Optionally copy non-acoustic files
+% (.xml, .csv, .txt) into a separate subfolder in the destination folder.
+
 tic;
 clear
 close all
@@ -17,8 +21,8 @@ START_FILE = ''; %leave blank to start from beginning. Only use when process was
 %maxDur = seconds(240);
 %multi-channel? incomplete
 %NumSamplerates = 1;
-%switch the moving of non-acoustic files on (1) and off (0)
-move_NonAcoustic = 1; 
+%switch the copying of non-acoustic files on (1) and off (0)
+copy_NonAcoustic = 1; 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %ri = seconds(ri); % interval to duration
@@ -174,7 +178,7 @@ movedfiletable = struct2table(movedfiles);           %Create table of moved/merg
 %    delete(info_lf.Filename);
 %end
 
-if move_NonAcoustic == 1
+if copy_NonAcoustic == 1
     ext = {'**/*.csv','**/*.xml', '**/*.txt'};
     extensions = cellfun(@(x)dir(fullfile(Path2Data,x)),ext,'UniformOutput',false); 
     other_files = vertcat(extensions{:});
