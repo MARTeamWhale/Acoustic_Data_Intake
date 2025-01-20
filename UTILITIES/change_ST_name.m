@@ -1,19 +1,17 @@
 %change_ST_name.m
 %
-% Change SoundTrap filename to match Standard timing
+% Create new copy of SoundTrap .wav files, changing format of datetime stamp in filenames
+% to match ISO standard (YYYYMMDDTHHMMSSZ)
 clear
 close all
 %%%%%%%%%%%%%%%%%
 %Change as needed
 %%%%%%%%%%%%%%%%%
-Path2dataset = "F:\CSE_2022_10";
-datafolder = '';
+Path2Input = "F:\CSE_2022_10";
 Path2Output = "G:\CSE_2022_10\ST6767-6769";
 %%%%%%%%%%%%%%%%%
 
-Path2data = join([Path2dataset,datafolder],'');
-
-fileList = dir(fullfile(Path2data, '**/*.wav')); %Get fileslist
+fileList = dir(fullfile(Path2Input, '**/*.wav')); %Get fileslist
 fileList = struct2table(fileList);
 
 
