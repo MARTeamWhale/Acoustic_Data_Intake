@@ -1,9 +1,11 @@
-%change_ST_name.m
-%
-% Create new copy of SoundTrap .wav files, changing format of datetime stamp in filenames
-% to match ISO standard (YYYYMMDDTHHMMSSZ)
+%Copy_rename_SoundTrap_wavfiles.m
+
+% Create new copy of SoundTrap .wav files in designated target location, changing format of datetime stamp in filenames
+% to match ISO 8601 standard (YYYYMMDDTHHMMSSZ)
+
 clear
 close all
+
 %%%%%%%%%%%%%%%%%
 %Change as needed
 %%%%%%%%%%%%%%%%%
@@ -13,7 +15,6 @@ Path2Output = "G:\CSE_2022_10\ST6767-6769";
 
 fileList = dir(fullfile(Path2Input, '**/*.wav')); %Get fileslist
 fileList = struct2table(fileList);
-
 
 
 for i = 1:height(fileList)
@@ -37,7 +38,7 @@ for i = 1:height(fileList)
     %system("rename " + Path2file + " " + NewName);
     waitbar(i/height(fileList),h)
 end
-
+close(h)
 
 %% doDTRead ---------------------------------------------------------------
 function dt = doDTReadST(fileName)
