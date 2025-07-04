@@ -7,9 +7,9 @@ close all
 %%%%%%%%%%%%%%%%%
 %Change as needed
 %%%%%%%%%%%%%%%%%
-Dataset = 'CS3_2022_10';
-Path2dataset = "G:\CS3-2022-10\";
-datafolder = 'AMAR664.1.256000';
+Dataset = 'CS1_2023_08';
+Path2dataset = "D:\CS1_2023_08\";
+datafolder = 'ST7526';
 seed = 24; %Change seed for each selection
 %%%%%%%%%%%%%%%%%
 seed_text = join(['Seed: ' , num2str(seed)]);

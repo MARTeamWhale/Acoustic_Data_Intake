@@ -6,11 +6,11 @@ close all
 %%%%%%%%%%%%%%%%%
 %Change as needed
 %%%%%%%%%%%%%%%%%
-Dataset = 'CS3_2022_10';
-Path2dataset = "G:\CS3-2022-10\";
-datafolder = 'AMAR664.1.256000';
-DeploymentDate = "2022-10-15";
-RecoveryDate = "2023-08-20";
+Dataset = 'CS1_2022_10';
+Path2dataset = "D:\CS1_2023_08\";
+datafolder = 'ST7526';
+DeploymentDate = "2023-08-19";
+RecoveryDate = "2024-08-19";
 Foverride = 0; % 1: uses filesize values entered 0: uses median filesize (works in most cases)
 file_size_override = 44496280; %48907866; %145299528; %327931464; 
 Stat_toolbox = 0; %Set to 0 if license for stats toolbox checkout fails
