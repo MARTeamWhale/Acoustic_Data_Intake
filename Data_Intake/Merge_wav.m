@@ -1,21 +1,22 @@
+%Merge_wav.m 
 
-%Merge_wav.mat 
-
-% Merge consecutive AMAR .wav files and write merged files to a new
-% location. Optionally copy non-acoustic files
-% (.xml, .csv, .txt) into a separate subfolder in the destination folder.
+% Merge consecutive AMAR .wav files and write merged files to a new location. 
+% Optionally copy non-acoustic files (.xml, .csv, .txt) into a separate subfolder in the destination folder.
 
 tic;
 clear
 close all
 
 %%%%% Make changes as needed %%%%%
-%enter path to highest data folder
 
+% enter path to data source folder
 Path2Data = 'D:\MERGE_TEST\MGL_2023_08_backup';
+% enter path to data destination folder
 Path2Output = 'D:\MERGE_TEST\MGL_2023_08_merged';
 
-START_FILE = ''; %leave blank to start from beginning. Only use when process was interrupted
+% leave START_FILE blank to start from beginning. Only use when process was interrupted
+START_FILE = ''; 
+
 %recording interval
 %ri = 900; %seconds
 %maxDur = seconds(240);
@@ -23,6 +24,7 @@ START_FILE = ''; %leave blank to start from beginning. Only use when process was
 %NumSamplerates = 1;
 %switch the copying of non-acoustic files on (1) and off (0)
 copy_NonAcoustic = 1; 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %ri = seconds(ri); % interval to duration

@@ -1,15 +1,22 @@
-%Move_wav.mat 
-%Move AMAR .wav files
+%Move_wav.m
+
+% Move all .wav files from one directory to another. Optionally move non-acoustic files
+% (.xml, .csv, .txt) into a separate subfolder in the destination folder.
+
 tic;
 clear
 close all
 
 %%%%% Make changes as needed %%%%%
-%enter path to highest data folder
+
+% enter path to data source folder
 Path2Data = 'G:\CBN_2022_10\Data';
+% enter path to data destination folder
 Path2Output = 'F:\CBN_2022_10\AMAR819.1234.32000';
-%if you want to skip the moving of Non-Acoustic files set to 0
+
+% if you want to skip the moving of non-acoustic files set to 0
 move_NonAcoustic = 1;
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 files = dir(fullfile(Path2Data, '**\*.wav')); %Recursively find all WAV files (add sorting...)

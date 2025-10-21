@@ -1,4 +1,4 @@
-%Copy_wav.mat 
+%Copy_wav.m 
 
 % Copy AMAR .wav files to new location, organizing into subfolders based on
 % sampling rate and/or channel number. Optionally copy non-acoustic files
@@ -9,15 +9,15 @@ clear
 close all
 
 %%%%% Make changes as needed %%%%%
-%enter path to data source folder
+
+% enter path to data source folder
 Path2Data = 'E:\MGE_2022_10';
-%enter path to data destination folder
+% enter path to data destination folder
 Path2Output = 'D:\MGE_2022_10';
-%if you want to skip copying non-acoustic files set to 0
+% if you want to skip copying non-acoustic files set to 0
 copy_NonAcoustic = 1;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 files = dir(fullfile(Path2Data, '**\*.wav')); %Recursively find all WAV files
 %INFO = [];
