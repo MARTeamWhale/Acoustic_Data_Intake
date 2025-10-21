@@ -1,21 +1,25 @@
-%mk_QAQC_report.m
-%
-% Generate report on dataset quality
+%mk_rawdata_report.m
+
+% Generate preliminary report on dataset completeness
+
 clear
 close all
-%%%%%%%%%%%%%%%%%
-%Change as needed
-%%%%%%%%%%%%%%%%%
+
+%%%%% Make changes as needed %%%%%
+
+% enter path to data source folder
+Path2data = 'F:\CS3-2022-10';
+% specify dataset name
 Dataset = 'CS3_2022_10';
-Path2dataset = "F:\CS3-2022-10";
-datafolder = '';
+% specify deployment and recovery dates from Whale Equipment MetaDatabase
 DeploymentDate = "2022-10-15";
 RecoveryDate = "2023-08-20";
+
+% optional settings if needed
 Foverride = 0; % 1: uses filesize values entered 0: uses median filesize (works in most cases)
 file_size_override = 44496280; %48907866; %145299528; %327931464; 
-%%%%%%%%%%%%%%%%%
 
-Path2data = join([Path2dataset,datafolder],'');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 fileList = dir(fullfile(Path2data, '**\*.wav'));
 
