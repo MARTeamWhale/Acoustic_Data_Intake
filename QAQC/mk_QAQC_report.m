@@ -21,7 +21,7 @@ Stat_toolbox = 0; % set to 0 if license for stats toolbox checkout fails
 
 %%%%%%%%%%%%%%%%%
 
-Path2data = join([Path2dataset,datafolder],'');
+Path2data = join([Path2dataset,'\',datafolder],'');
 
 fileList = dir(fullfile(Path2data, '*.wav'));
 
@@ -198,7 +198,7 @@ disp(small_interval_text);
 save = 1;
 
 if save == 1
-   Path2QAQC = join([Path2dataset,'QAQC_results'],'');
+   Path2QAQC = join([Path2dataset,'\','QAQC_results'],'');
 
    if exist(Path2QAQC,'dir')==0
       mkdir(Path2QAQC);

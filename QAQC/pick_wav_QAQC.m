@@ -15,7 +15,7 @@ seed = 24; % change seed for each selection
 %%%%%%%%%%%%%%%%%
 
 seed_text = join(['Seed: ' , num2str(seed)]);
-Path2data = join([Path2dataset,datafolder],'');
+Path2data = join([Path2dataset,'\',datafolder],'');
 fileList = dir(fullfile(Path2data, '*.wav'));
 
 %initialiaze random number generator and set seed
@@ -30,7 +30,7 @@ Files2chck = fileList(r,:);
 save = 1;
 
 if save == 1
-   Path2QAQC = join([Path2dataset,'QAQC_results'],'');
+   Path2QAQC = join([Path2dataset,'\','QAQC_results'],'');
 
    if exist(Path2QAQC,'dir')==0
       mkdir(Path2QAQC);
