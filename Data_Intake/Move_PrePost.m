@@ -6,15 +6,19 @@ clear
 close all
 
 %%%%% Make changes as needed %%%%%
-%enter path to data source folder
-Path2Data = 'G:\CS3-2022-10\';
-%enter path to data destination folder
-Path2Output = 'G:\CS3-2022-10\';
-% Enter Deployment and Recovery Date from Whale Equipment MetaDatabase
+
+% enter path to data source folder
+Path2Data = 'G:\CS3-2022-10';
+% enter path to data destination folder
+Path2Output = 'G:\CS3-2022-10';
+
+% Enter deployment and recovery dates & times from Whale Equipment MetaDatabase
 DeploymentDateTime = "2022-10-15 17:36:00";
 RecoveryDateTime = "2023-08-20 09:12:00";
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% part 1: move pre & post deployment files
 DeploymentDateTime = datetime(DeploymentDateTime);
 RecoveryDateTime = datetime(RecoveryDateTime);
 files = dir(fullfile(Path2Data, '**\*.wav'));
@@ -39,3 +43,26 @@ for f = 1:length(PrePostFiles)
     movefile(file,[Path2Output,'\Pre&PostDeployment'])
 end
 
+% part 2: move first and last day files
+FirstDateTime = dateshift(DeploymentDateTime, 'end', 'day');
+LastDateTime = dateshift(RecoveryDateTime, 'start', 'day');
+filesfirstlastday = zeros(length(files),1);
+
+for ii = 1:length(files)
+    files(ii).datetime = datetime(readDateTime(convertStringsToChars(files(ii).name)));
+    if files(ii).datetime < FirstDateTime || files(ii).datetime > LastDateTime
+       filesfirstlastday(ii) = 1;
+    end
+end
+
+FirstLastFiles = files(logical(filesfirstlastday),:);
+
+    if ~exist([Path2Output,'\FirstLastDay'], 'dir')
+       mkdir([Path2Output,'\FirstLastDay'])
+    end
+    
+for ff = 1:length(FirstLastFiles)
+    file = [FirstLastFiles(ff).folder,'\',FirstLastFiles(ff).name];
+    %copyfile(file,[Path2Output,'\Pre&PostDeployment'])
+    movefile(file,[Path2Output,'\FirstLastDay'])
+end
