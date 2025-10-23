@@ -1,19 +1,24 @@
 %mk_QAQC_report.m
-%
+
 % Generate report on dataset quality
+
 clear
 close all
-%%%%%%%%%%%%%%%%%
-%Change as needed
-%%%%%%%%%%%%%%%%%
-Dataset = 'CS1_2022_10';
-Path2dataset = "D:\CS1_2023_08\";
-datafolder = 'ST7526';
+
+%%%%% Make changes as needed %%%%%
+
+Dataset = 'CS2_2023_08';
+Path2dataset = 'D:\CS2_2023_08';
+datafolder = 'AMAR533.1.32000';
+
 DeploymentDate = "2023-08-19";
 RecoveryDate = "2024-08-19";
+
+% optional settings if needed
 Foverride = 0; % 1: uses filesize values entered 0: uses median filesize (works in most cases)
 file_size_override = 44496280; %48907866; %145299528; %327931464; 
-Stat_toolbox = 0; %Set to 0 if license for stats toolbox checkout fails
+Stat_toolbox = 0; % set to 0 if license for stats toolbox checkout fails
+
 %%%%%%%%%%%%%%%%%
 
 Path2data = join([Path2dataset,datafolder],'');
@@ -203,13 +208,13 @@ if save == 1
    path2QAQCtxt = join([Path2QAQC,'\',results_fn],'');
    fid = fopen(path2QAQCtxt,'wt');
          fprintf(fid,'%s\n',Dataset);
-         fprintf(fid,'%s\n',days_text);
-         fprintf(fid,'%s\n',firstDay_text);
          fprintf(fid,'%s\n',DeploymentDateText);
-         fprintf(fid,'%s\n',lastDay_text);
          fprintf(fid,'%s\n',RecoveryDateText);
+         fprintf(fid,'%s\n',firstDay_text);
+         fprintf(fid,'%s\n',lastDay_text);
+         fprintf(fid,'%s\n',days_text);
+         fprintf(fid,'%s\n',file_prediction_text);         
          fprintf(fid,'%s\n',numfiles);
-         fprintf(fid,'%s\n',file_prediction_text);
          fprintf(fid,'%s\n',Total_GB_text);
          fprintf(fid,'%s\n',Interval_text);
          if ~isempty(gap)

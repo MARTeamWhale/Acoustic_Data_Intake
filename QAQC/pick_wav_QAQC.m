@@ -1,17 +1,19 @@
 %pick_wav_QAQC.m
-%
-%pick 5 random files for QAQC 
+
+% Select 5 random files for manual QAQC 
 
 clear
 close all
+
+%%%%% Make changes as needed %%%%%
+
+Dataset = 'CS2_2023_08';
+Path2dataset = 'D:\CS2_2023_08';
+datafolder = 'AMAR533.1.32000';
+seed = 24; % change seed for each selection
+
 %%%%%%%%%%%%%%%%%
-%Change as needed
-%%%%%%%%%%%%%%%%%
-Dataset = 'CS1_2023_08';
-Path2dataset = "D:\CS1_2023_08\";
-datafolder = 'ST7526';
-seed = 24; %Change seed for each selection
-%%%%%%%%%%%%%%%%%
+
 seed_text = join(['Seed: ' , num2str(seed)]);
 Path2data = join([Path2dataset,datafolder],'');
 fileList = dir(fullfile(Path2data, '*.wav'));
