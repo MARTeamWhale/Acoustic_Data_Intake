@@ -1,5 +1,7 @@
 %Move_PrePost.m
 
+% Move pre and post deployment wav files and files from the first and last
+% day to separate subfolders
 
 clear
 close all
