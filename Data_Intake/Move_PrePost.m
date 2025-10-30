@@ -1,6 +1,5 @@
 %Move_PrePost.m
 
-%Move pre and post deployment wav files to seperate folder
 
 clear
 close all
@@ -50,7 +49,7 @@ filesfirstlastday = zeros(length(files),1);
 
 for ii = 1:length(files)
     files(ii).datetime = datetime(readDateTime(convertStringsToChars(files(ii).name)));
-    if files(ii).datetime < FirstDateTime || files(ii).datetime > LastDateTime
+    if files(ii).datetime < FirstDateTime && files(ii).datetime > DeploymentDateTime || files(ii).datetime > LastDateTime && files(ii).datetime < RecoveryDateTime
        filesfirstlastday(ii) = 1;
     end
 end
