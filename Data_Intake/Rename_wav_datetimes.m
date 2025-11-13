@@ -1,6 +1,7 @@
 %Rename_wav_datetimes.m
 
-% Rename wav files to adjust date and time stamps
+% Rename wav files to adjust date and time stamps based on offset between
+% known "real start time" and the time in the first filename of the dataset
 
 tic;
 clear
