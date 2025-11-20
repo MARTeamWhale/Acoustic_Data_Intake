@@ -1,8 +1,9 @@
 %Copy_wav.m 
 
 % Copy AMAR .wav files to new location, organizing into subfolders based on
-% sampling rate and/or channel number. Optionally copy non-acoustic files
-% (.xml, .csv, .txt) into a separate subfolder in the destination folder.
+% sampling rate and/or channel number. Non-acoustic files (.xml, .txt) will be copied
+% into a separate subfolder in the destination folder. To also copy .csv
+% files to this folder, set option below.
 
 tic;
 clear
@@ -14,16 +15,15 @@ close all
 Path2Data = 'E:\MGE_2022_10';
 % enter path to data destination folder
 Path2Output = 'D:\MGE_2022_10';
-% if you want to skip copying non-acoustic files set to 0
-copy_NonAcoustic = 1;
+% to copy csv files to "Non-Acoustic Files" folder, set to 1
+copy_csv = 0;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-files = dir(fullfile(Path2Data, '**\*.wav')); %Recursively find all WAV files
+files = dir(fullfile(Path2Data, '**\*.wav')); % Recursively find all WAV files
 %INFO = [];
 
-for f = 1:length(files)
-%for f = 1:100   
+for f = 1:length(files) 
     file = [files(f).folder,'\',files(f).name];
     info = audioinfo(file);
     %INFO = [INFO;info]; works... but slow
@@ -40,17 +40,21 @@ for f = 1:length(files)
 end
 
 
-if copy_NonAcoustic == 1
+if copy_csv == 1
     ext = {'**/*.csv','**/*.xml', '**/*.txt'};
-    extensions = cellfun(@(x)dir(fullfile(Path2Data,x)),ext,'UniformOutput',false); 
-    other_files = vertcat(extensions{:});
-
-        if ~exist([Path2Output,'\Non-Acoustic Files'], 'dir')
-            mkdir([Path2Output,'\Non-Acoustic Files'])
-        end
-    for f = 1:length(other_files)
-        file = [other_files(f).folder,'\',other_files(f).name];
-    copyfile(file,[Path2Output,'\Non-Acoustic Files'])
-    end
+elseif copy_csv == 0
+    ext = {'**/*.xml', '**/*.txt'};
 end
+
+extensions = cellfun(@(x)dir(fullfile(Path2Data,x)),ext,'UniformOutput',false);
+other_files = vertcat(extensions{:});
+
+if ~exist([Path2Output,'\Non-Acoustic Files'], 'dir')
+    mkdir([Path2Output,'\Non-Acoustic Files'])
+end
+for f = 1:length(other_files)
+    file = [other_files(f).folder,'\',other_files(f).name];
+    copyfile(file,[Path2Output,'\Non-Acoustic Files'])
+end
+
 toc;
